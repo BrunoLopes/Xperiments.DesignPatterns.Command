@@ -12,6 +12,20 @@
 
 ![N|MFYIT](https://upload.wikimedia.org/wikipedia/commons/a/a7/Estrutura-command.png)
 
+## Problema 
+
+> Algumas vezes é necessário emitir solicitações para objetos nada sabendo sobre a operação que está sendo solicitada ou sobre o receptor da mesma.
+Utilizar quando:
+* Parametrizar objetos por uma ação a ser executada. Você pode expressar tal parametrização numa linguagem procedural através de uma função callback, ou seja, uma função que é registrada em algum lugar para ser chamada em um momento mais adiante. Os Commands são uma substituição orientada a objetos para callbacks;
+* Especificar, enfileirar e executar solicitações em tempos diferentes. Um objeto Command pode ter um tempo de vida independente da solicitação original. Se o receptor de uma solicitação pode ser representado de uma maneira independente do espaço de endereçamento, então você pode transferir um objeto Command para a solicitação para um processo diferente e lá atender a solicitação;
+* Suportar desfazer operações. A operação Execute, de Command, pode armazenar estados para reverter seus efeitos no próprio comando. A interface do Command deve ter acrescentada uma operação Unexecute, que o reverte.efeitos de uma chamada anterior de Execute. Os comandos executados são armazenados em uma lista histórica. O nível ilimitado de desfazer e refazer operações é obtido percorrendo esta lista para trás e para frente, chamando operações Unexecute e Execute, respectivamente.
+
+## Aplicabilidade 
+
+> A chave deste padrão é uma classe abstrata Command, a qual declara uma interface para execução de operações. Na sua forma mais simples, esta interface inclui uma operação abstrata Execute. As subclasses concretas de Command especificam um par receptor-ação através do armazenamento do receptor como uma variável de instância e pela implementação de Execute para invocar a solicitação. O receptor tem o conhecimento necessário para poder executar a solicitação, porém externamente os objetos não sabem quais ações estão sendo executadas no receptor, eles apenas visualizam o método execute() que irá executar as suas solicitações. Desta forma, todos os clientes de objetos command tratam cada objeto como uma "caixa preta", simplesmente invocando o método execute()sempre que o cliente exige "serviço" do objeto.
+
+> Usar objetos de Command faz com que seja mais fácil construir componentes gerais que precisam delegar, sequenciar ou executar chamadas de métodos em um momento de sua escolha, sem a necessidade de conhecer a classe do método ou os parâmetros do método. Usar um objeto invoker permite contabilizar sobre as execuções de comando a serem realizadas convenientemente, bem como a implementação de diferentes modos para comando, que são geridos pelo objeto invoker, sem a necessidade do cliente estar ciente da existência da contabilidade ou modos.
+
 ---
 
 ### Installation
